@@ -1,0 +1,8 @@
+%h3 送金
+= simple_form_for :transfer, url: transfers_path do |f|
+  %label 送金先アドレス
+  %p= @address
+  = f.input :address, as: :hidden, input_html: { value: @address }
+  = f.input :amount, as: :integer, label: '送金量(MS)', input_html: { class: 'transfer__amount-form' }
+  = f.button :submit, '送金する', class: 'btn btn-primary', data: { confirm: '本当に送金しますか？', disable_with: '送金中...' }
+

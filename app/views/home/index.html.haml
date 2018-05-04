@@ -1,0 +1,50 @@
+- accounts = @ethereum_api.get_accounts
+- user1_address = accounts[0]
+- user2_address = accounts[1]
+%h3 独自トークン送金テスト
+%p
+  総供給量:
+  = @ethereum_api.contract.call.total_supply()
+  MS
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title
+          アドレス1：
+          = user1_address
+      .panel-body
+        .div
+          %label
+            トークン残高：
+          %span
+            = @ethereum_api.contract.call.balance_of(user1_address)
+            MS
+        .div
+          %label
+            Ether残高：
+          %span
+            - formatter = Ethereum::Formatter.new
+            = formatter.from_wei(Integer(@ethereum_api.client.eth_get_balance(user1_address)['result'])).to_f
+            ETH
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title
+          アドレス2：
+          = user2_address
+      .panel-body
+        .div
+          %label
+            トークン残高：
+          %span
+            = @ethereum_api.contract.call.balance_of(user2_address)
+            MS
+        .div
+          %label
+            Ether残高：
+          %span
+            - formatter = Ethereum::Formatter.new
+            = formatter.from_wei(Integer(@ethereum_api.client.eth_get_balance(user2_address)['result'])).to_f
+            ETH
+= link_to fa_icon('arrow-right', text: 'アドレス2に送金する'), new_transfer_path(address: user2_address)

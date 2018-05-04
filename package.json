@@ -1,5 +1,7 @@
 {
   "name": "ethereum-token-sample",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "zeppelin-solidity": "^1.9.0"
+  }
 }
