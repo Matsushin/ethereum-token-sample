@@ -4,5 +4,6 @@ class HomeController < ApplicationController
 
   def index
     @ethereum_api = EthereumApi.new
+    @token = Token.first
   end
 end

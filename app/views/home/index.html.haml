@@ -1,11 +1,13 @@
 - accounts = @ethereum_api.get_accounts
 - user1_address = accounts[0]
 - user2_address = accounts[1]
-%h3 独自トークン送金テスト
+%h3
+  = @token.name
+  送金テスト
 %p
   総供給量:
   = @ethereum_api.contract.call.total_supply()
-  MS
+  = @token.symbol
 .row
   .col-md-6
     .panel.panel-default
@@ -19,7 +21,7 @@
             トークン残高：
           %span
             = @ethereum_api.contract.call.balance_of(user1_address)
-            MS
+            = @token.symbol
         .div
           %label
             Ether残高：
@@ -39,7 +41,7 @@
             トークン残高：
           %span
             = @ethereum_api.contract.call.balance_of(user2_address)
-            MS
+            = @token.symbol
         .div
           %label
             Ether残高：

@@ -4,6 +4,7 @@ class TransfersController < ApplicationController
 
   def new
     @address = params[:address]
+    @token = Token.first
   end
 
   def create
@@ -13,6 +14,7 @@ class TransfersController < ApplicationController
     if @ethereum_api.transfer(@address, amount.to_i)
       redirect_to root_path, notice: '送金に成功しました。'
     else
+      @token = Token.first
       flash[:alert] = '送金に失敗しました。'
       render :new
     end
